@@ -7,7 +7,7 @@
         </li>
         <li
           class="page-item"
-          v-for="(totalPage, page) in totalPages.slice(currentPage+2,currentPage+10)"
+          v-for="(totalPage, page) in totalPages.slice(currentPage,currentPage+10)"
           :key="page"
         >
           <!-- <a v-if="page > 3" class="page-link" v-on:click="nextPage()">...</a> -->
@@ -38,7 +38,7 @@ import axios from "axios";
 export default {
   name: "Home",
   components: {
-    Template
+    Template,
   },
   data() {
     return {
@@ -48,13 +48,13 @@ export default {
       perPage: 20,
       totalItems: 0,
       totalPages: [],
-      totalPageNum: 0
+      totalPageNum: 0,
     };
   },
   watch: {
     data() {
       this.currentPage;
-    }
+    },
   },
   async mounted() {
     await this.getPokemonApi();
@@ -64,8 +64,9 @@ export default {
     async getPokemonApi() {
       try {
         const response = await axios.get(
-          `https://pokeapi.co/api/v2/pokemon/?offset=${this.currentPage *
-            this.perPage}&limit=${this.perPage}`
+          `https://pokeapi.co/api/v2/pokemon/?offset=${
+            this.currentPage * this.perPage
+          }&limit=${this.perPage}`
         );
         this.pokemonList = response.data.results;
         this.totalItems = response.data.count;
@@ -103,14 +104,14 @@ export default {
         this.currentPage++;
         this.getPokemonApi();
       }
-    }
+    },
     // minPagination() {
     //   return this.currentPage + 4;
     // },
     // maxPagination() {
     //   return this.currentPage + 10;
     // }
-  }
+  },
 };
 </script>
 
@@ -120,9 +121,5 @@ a:active {
 }
 a:hover {
   color: hotpink;
-}
-
-.page-link {
-  background: blue;
 }
 </style>
