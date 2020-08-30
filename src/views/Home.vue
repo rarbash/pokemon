@@ -122,4 +122,7 @@ a:active {
 a:hover {
   color: hotpink;
 }
+.pagination {
+  margin-left: 30%;
+}
 </style>
