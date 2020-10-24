@@ -5,17 +5,35 @@
         <li class="page-item">
           <a class="page-link" v-on:click="beforePage()">Previous</a>
         </li>
+        <li class="page-item">
+          <a class="page-link" v-on:click="changePage(0)">1</a>
+        </li>
+        <li v-if="currentPage >0 && currentPage !=2" class="page-item">
+          <a class="page-link">...</a>
+        </li>
         <li
           class="page-item"
-          v-for="(totalPage, page) in totalPages.slice(currentPage,currentPage+10)"
+          v-for="(totalPage, page) in totalPages.slice(currentPage,currentPage+3)"
           :key="page"
         >
-          <!-- <a v-if="page > 3" class="page-link" v-on:click="nextPage()">...</a> -->
           <a
+            v-if="currentPage > 1"
+            class="page-link"
+            v-on:click="changePage(totalPage -2)"
+            :active="page === currentPage"
+          >{{ totalPage - 1}}</a>
+          <a
+            v-else
             class="page-link"
             v-on:click="changePage(totalPage)"
             :active="page === currentPage"
           >{{ totalPage + 1 }}</a>
+        </li>
+        <li v-if="currentPage < 45" class="page-item">
+          <a class="page-link">...</a>
+        </li>
+        <li class="page-item">
+          <a class="page-link" v-on:click="changePage(49)">51</a>
         </li>
         <li class="page-item">
           <a class="page-link" v-on:click="nextPage()">Next</a>
@@ -82,7 +100,7 @@ export default {
     },
     pagination() {
       this.totalPageNum = Math.floor(this.totalItems / this.perPage);
-      for (let i = 1; i <= this.totalPageNum; i++) {
+      for (let i = 1; i <= 51; i++) {
         this.totalPages.push(i);
       }
       return this.totalPages;
@@ -91,6 +109,7 @@ export default {
       this.currentPage = page;
       this.pageActive = this.currentPage;
       this.getPokemonApi();
+      console.log(page);
     },
     beforePage() {
       if (this.currentPage !== 0) {
@@ -100,17 +119,11 @@ export default {
     },
     nextPage() {
       if (this.currentPage < this.totalPageNum) {
-        console.log(this.currentPage);
         this.currentPage++;
+        console.log(this.currentPage);
         this.getPokemonApi();
       }
     },
-    // minPagination() {
-    //   return this.currentPage + 4;
-    // },
-    // maxPagination() {
-    //   return this.currentPage + 10;
-    // }
   },
 };
 </script>
@@ -119,10 +132,7 @@ export default {
 a:active {
   background: pink;
 }
-a:hover {
-  color: hotpink;
-}
 .pagination {
-  margin-left: 30%;
+  margin-left: 37%;
 }
 </style>

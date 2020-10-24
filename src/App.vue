@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <div class="background">
-      <div class="nav">
+      <div class="navbar">
         <img src="./assets/pokemon_logo.png" alt="Page logo" class="logoimg" />
       </div>
       <Home />
@@ -39,7 +39,7 @@ template {
   padding: 2%;
   margin-left: 35%;
 }
-.nav {
+.navbar {
   width: 100%;
   background: #e99f04;
   text-align: center;
