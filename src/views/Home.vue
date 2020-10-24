@@ -29,7 +29,7 @@
             :active="page === currentPage"
           >{{ totalPage + 1 }}</a>
         </li>
-        <li v-if="currentPage < 45" class="page-item">
+        <li v-if="currentPage < 48" class="page-item">
           <a class="page-link">...</a>
         </li>
         <li class="page-item">
